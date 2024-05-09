@@ -1,0 +1,58 @@
+Device,Sensor
+Nest Thermostat,Temperature Sensor
+Nest Thermostat,Humidity Sensor
+Nest Thermostat,Pressure Sensor
+Philips Hue,Proximity Sensor
+Philips Hue,Accelerometer
+Philips Hue,Gyroscope Sensor
+Fitbit,Light Sensor
+Fitbit,Gas Sensor
+Fitbit,Infrared Sensor
+Google Glass,Ultrasonic Sensor
+Google Glass,Sound Sensor
+Google Glass,Magnetometer Sensor
+Traffic Control System,Image Sensor
+Traffic Control System,Motion Detection Sensor
+Traffic Control System,Water Quality Sensor
+Waste Management System,Radar Sensor
+Waste Management System,Smoke Sensor
+Waste Management System,RFID Tag
+Predictive Maintenance Device,Heart Rate Sensor
+Predictive Maintenance Device,GPS Sensor
+Predictive Maintenance Device,Temperature Sensor
+Asset Tracking Device,Humidity Sensor
+Asset Tracking Device,Pressure Sensor
+Asset Tracking Device,Proximity Sensor
+Tesla Car,Accelerometer
+Tesla Car,Gyroscope Sensor
+Tesla Car,Light Sensor
+Apple CarPlay,Gas Sensor
+Apple CarPlay,Infrared Sensor
+Apple CarPlay,Ultrasonic Sensor
+Smart Irrigation System,Sound Sensor
+Smart Irrigation System,Magnetometer Sensor
+Smart Irrigation System,Image Sensor
+Crop Monitoring System,Motion Detection Sensor
+Crop Monitoring System,Water Quality Sensor
+Crop Monitoring System,Radar Sensor
+IoT-enabled POS,Smoke Sensor
+IoT-enabled POS,RFID Tag
+IoT-enabled POS,Heart Rate Sensor
+RFID Inventory Tracking Chip,GPS Sensor
+RFID Inventory Tracking Chip,Temperature Sensor
+RFID Inventory Tracking Chip,Humidity Sensor
+Remote Patient Monitoring Device,Pressure Sensor
+Remote Patient Monitoring Device,Proximity Sensor
+Remote Patient Monitoring Device,Accelerometer
+Smart Bed,Gyroscope Sensor
+Smart Bed,Light Sensor
+Smart Bed,Gas Sensor
+Smart Meter,Infrared Sensor
+Smart Meter,Ultrasonic Sensor
+Smart Meter,Sound Sensor
+Smart TV,Magnetometer Sensor
+Smart TV,Image Sensor
+Smart TV,Motion Detection Sensor
+Drone,Water Quality Sensor
+Drone,Radar Sensor
+Drone,Smoke Sensor

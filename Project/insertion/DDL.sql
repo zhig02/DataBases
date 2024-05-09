@@ -1,0 +1,70 @@
+CREATE SCHEMA IF NOT EXISTS project;
+
+DROP TABLE IF EXISTS project.UserDevices CASCADE;
+CREATE TABLE project.UserDevices (
+  UserDeviceID SERIAL PRIMARY KEY,
+  UserID INTEGER NOT NULL,
+  DeviceID INTEGER NOT NULL,
+  FOREIGN KEY (UserID) REFERENCES project.Users(UserID),
+  FOREIGN KEY (DeviceID) REFERENCES project.Devices(DeviceID)
+);
+
+DROP TABLE IF EXISTS project.DeviceGroups CASCADE;
+CREATE TABLE project.DeviceGroups (
+  GroupID SERIAL PRIMARY KEY,
+  DeviceID INTEGER NOT NULL,
+  GroupName VARCHAR(255) NOT NULL,
+  FOREIGN KEY (DeviceID) REFERENCES project.Devices(DeviceID)
+);
+
+DROP TABLE IF EXISTS project.Sensors CASCADE;
+CREATE TABLE project.Sensors (
+  SensorID SERIAL PRIMARY KEY,
+  SensorType VARCHAR(255) NOT NULL,
+  SensorStatus VARCHAR(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS project.SensorData CASCADE;
+CREATE TABLE project.SensorData (
+  DataID SERIAL PRIMARY KEY,
+  SensorID INTEGER NOT NULL,
+  DataValue FLOAT NOT NULL,
+  valid_from TIMESTAMP NOT NULL,
+  valid_to TIMESTAMP NOT NULL,
+  FOREIGN KEY (SensorID) REFERENCES project.Sensors(SensorID)
+);
+
+DROP TABLE IF EXISTS project.Users CASCADE;
+CREATE TABLE project.Users (
+  UserID SERIAL PRIMARY KEY,
+  UserName VARCHAR(255) NOT NULL,
+  UserEmail VARCHAR(255) NOT NULL,
+  UserPassword VARCHAR(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS project.Events CASCADE;
+CREATE TABLE project.Events (
+  EventID SERIAL PRIMARY KEY,
+  DeviceID INTEGER NOT NULL,
+  EventType VARCHAR(255) NOT NULL,
+  EventTimestamp TIMESTAMP NOT NULL,
+  FOREIGN KEY (DeviceID) REFERENCES project.Devices(DeviceID)
+);
+
+
+DROP TABLE IF EXISTS project.Devices CASCADE;
+CREATE TABLE project.Devices (
+  DeviceID SERIAL PRIMARY KEY,
+  DeviceName VARCHAR(255) NOT NULL,
+  DeviceType VARCHAR(255) NOT NULL,
+  DeviceStatus VARCHAR(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS project.DeviceSensors CASCADE;
+CREATE TABLE project.DeviceSensors (
+  DeviceSensorID SERIAL PRIMARY KEY,
+  DeviceID INTEGER NOT NULL,
+  SensorID INTEGER NOT NULL,
+  FOREIGN KEY (DeviceID) REFERENCES project.Devices(DeviceID),
+  FOREIGN KEY (SensorID) REFERENCES project.Sensors(SensorID)
+);

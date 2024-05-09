@@ -10,21 +10,20 @@
 - **Генерация отчетов**: Данные в базе данных используются для генерации отчетов о работе IoT системы, включая отчеты о состоянии устройств, отчеты об использовании ресурсов и отчеты об обнаруженных аномалиях.
 ## 2. Концептуальная модель
 
-Наша концептуальная модель включает следующие значащие таблицы и связи между ними:
+Kонцептуальная модель включает следующие значащие таблицы и связи между ними:
 
 - **Устройства (Devices)**: Хранит информацию о каждом IoT устройстве.
 - **Датчики (Sensors)**: Хранит информацию о датчиках устройств.
-- **Данные с датчиков (SensorData)**: Хранит данные, собранные с датчиков на IoT устройствах. Связана с таблицей Устройства по полю DeviceID.
-- **События (Events)**: Хранит информацию о событиях или ошибках, которые происходят на IoT устройствах. Связана с таблицей Устройства по полю DeviceID.
+- **Данные с датчиков (SensorData)**: Хранит данные, собранные с датчиков на IoT устройствах.
+- **События (Events)**: Хранит информацию о событиях или ошибках, которые происходят на IoT устройствах.
 - **Пользователи (Users)**: Хранит информацию о пользователях, которые имеют доступ к IoT устройствам.
-- **Устройства пользователя (UserDevices)**: Отслеживает, какие устройства принадлежат или управляются каждым пользователем. Связана с таблицей Устройства по полю DeviceID и с таблицей Пользователи по полю UserID.
 - **Группы датчиков (DeviceGroups)**: Хранит информацию о группах датчиков, отвечающих за функционал локации
 
-![Concept Model](./pictures/concept_model.png)
+![Concept Model](./images/Concept_Model.png)
 
 
 ## 3. Логическая модель
-<img src="./pictures/LM.png" width="600" height="600">
+<img src="./images/Logic_Model.png" width="600" height="600">
 
 **Нормальная форма**\
 Т.к. устройства генерируют много однотипных записей, оптимальным решением будет свести таблицы к 3NF.
@@ -39,65 +38,114 @@
 ## 4. Физическая модель
 
 
-**Devices**
+**UserDevices**
 
 | Name | Description | Data Type | Limitation |
 | --- | --- | --- | --- |
-| DeviceID | Идентификатор устройства | integer | PRIMARY KEY |
-| DeviceName | Название устройства | varchar(255) | NOT NULL |
-| DeviceType | Тип устройства | varchar(255) | NOT NULL |
-| DeviceStatus | Статус устройства | varchar(255) | NOT NULL |
-
-**Sensors**
-
-| Name | Description | Data Type | Limitation |
-| --- | --- | --- | --- |
-| SensorID | Идентификатор датчика | integer | PRIMARY KEY |
-| DeviceID | Идентификатор устройства | integer | FOREIGN KEY REFERENCES Devices(DeviceID) |
-| SensorType | Тип датчика | varchar(255) | NOT NULL |
-| SensorStatus | Статус датчика | varchar(255) | NOT NULL |
-
-**Events**
-
-| Name | Description | Data Type | Limitation |
-| --- | --- | --- | --- |
-| EventID | Идентификатор события | integer | PRIMARY KEY |
-| DeviceID | Идентификатор устройства | integer | FOREIGN KEY REFERENCES Devices(DeviceID) |
-| EventType | Тип события | varchar(255) | NOT NULL |
-| EventTimestamp | Время события | timestamp | NOT NULL |
-
-**Users**
-
-| Name | Description | Data Type | Limitation |
-| --- | --- | --- | --- |
-| UserID | Идентификатор пользователя | integer | PRIMARY KEY |
-| UserName | Имя пользователя | varchar(255) | NOT NULL |
-| UserEmail | Электронная почта пользователя | varchar(255) | NOT NULL |
-| UserPassword | Пароль пользователя | varchar(255) | NOT NULL |
-
-**SensorData**
-
-| Name | Description | Data Type | Limitation |
-| --- | --- | --- | --- |
-| DataID | Идентификатор данных | integer | PRIMARY KEY |
-| SensorID | Идентификатор датчика | integer | FOREIGN KEY REFERENCES Sensors(SensorID) |
-| DataTimestamp | Время данных | timestamp | NOT NULL |
-| DataValue | Значение данных | float | NOT NULL |
-| valid_from | Время начала действия данных | timestamp | NOT NULL |
-| valid_to | Время окончания действия данных | timestamp | NOT NULL |
+| UserDeviceID | User device identifier | integer | PRIMARY KEY |
+| UserID | User identifier | integer | FOREIGN KEY, NOT NULL |
+| DeviceID | Device identifier | integer | FOREIGN KEY, NOT NULL |
 
 **DeviceGroups**
 
 | Name | Description | Data Type | Limitation |
 | --- | --- | --- | --- |
-| GroupID | Идентификатор группы | integer | PRIMARY KEY |
-| DeviceID | Идентификатор устройства | integer | FOREIGN KEY REFERENCES Devices(DeviceID) |
-| GroupName | Название группы | varchar(255) | NOT NULL |
+| GroupID | Group identifier | integer | PRIMARY KEY |
+| DeviceID | Device identifier | integer | FOREIGN KEY, NOT NULL |
+| GroupName | Group name | varchar(255) | NOT NULL |
 
-**UserDevices**
+**Sensors**
 
 | Name | Description | Data Type | Limitation |
 | --- | --- | --- | --- |
-| UserID | Идентификатор пользователя | integer | FOREIGN KEY REFERENCES Users(UserID) |
-| DeviceID | Идентификатор устройства | integer | FOREIGN KEY REFERENCES Devices(DeviceID) |
-| - | - | - | PRIMARY KEY (UserID, DeviceID) |
+| SensorID | Sensor identifier | integer | PRIMARY KEY |
+| SensorType | Sensor type | varchar(255) | NOT NULL |
+| SensorStatus | Sensor status | varchar(255) | NOT NULL |
+
+**SensorData**
+
+| Name | Description | Data Type | Limitation |
+| --- | --- | --- | --- |
+| DataID | Data identifier | integer | PRIMARY KEY |
+| SensorID | Sensor identifier | integer | FOREIGN KEY, NOT NULL |
+| DataValue | Data value | float | NOT NULL |
+| valid_from | Valid from timestamp | timestamp | NOT NULL |
+| valid_to | Valid to timestamp | timestamp | NOT NULL |
+
+**Users**
+
+| Name | Description | Data Type | Limitation |
+| --- | --- | --- | --- |
+| UserID | User identifier | integer | PRIMARY KEY |
+| UserName | User name | varchar(255) | NOT NULL |
+| UserEmail | User email | varchar(255) | NOT NULL |
+| UserPassword | User password | varchar(255) | NOT NULL |
+
+**Events**
+
+| Name | Description | Data Type | Limitation |
+| --- | --- | --- | --- |
+| EventID | Event identifier | integer | PRIMARY KEY |
+| DeviceID | Device identifier | integer | FOREIGN KEY, NOT NULL |
+| EventType | Event type | varchar(255) | NOT NULL |
+| EventTimestamp | Event timestamp | timestamp | NOT NULL |
+
+**Devices**
+
+| Name | Description | Data Type | Limitation |
+| --- | --- | --- | --- |
+| DeviceID | Device identifier | integer | PRIMARY KEY |
+| DeviceName | Device name | varchar(255) | NOT NULL |
+| DeviceType | Device type | varchar(255) | NOT NULL |
+| DeviceStatus | Device status | varchar(255) | NOT NULL |
+
+**DeviceSensors**
+
+| Name | Description | Data Type | Limitation |
+| --- | --- | --- | --- |
+| DeviceSensorID | Device sensor identifier | integer | PRIMARY KEY |
+| DeviceID | Device identifier | integer | FOREIGN KEY, NOT NULL |
+| SensorID | Sensor identifier | integer | FOREIGN KEY, NOT NULL |
+
+## 5. Реализация схемы посредством DDL-скриптов
+
+Пример создания схемы и таблицы Devices
+```
+CREATE SCHEMA IF NOT EXISTS project;
+
+CREATE TABLE project.Devices (
+  DeviceID SERIAL PRIMARY KEY,
+  DeviceName VARCHAR(255) NOT NULL,
+  DeviceType VARCHAR(255) NOT NULL,
+  DeviceStatus VARCHAR(255) NOT NULL
+);
+```
+**Full script:** [DDL.sql](./insertion/DDL.sql)
+
+## 6. Заполнение схемы данными
+
+| Tables | SQL Scripts | CSV Files |
+| --- | --- | --- |
+| **Devices** | [Devices.sql](./insertion/Devices.sql) | |
+| **Users** | [Users.sql](./insertion/Users.sql) | |
+| **Sensors** | [Sensors.sql](./insertion/Sensors.sql) | |
+| **Events** | [Events.sql](./insertion/Events.sql) | |
+| **DeviceGroups** | [DeviceGroups.sql](./insertion/DeviceGroups.sql) | |
+| **SensorData** | [SensorData.sql](./insertion/SensorData.sql) | |
+| **UserDevices** | [UserDevices.py](./insertion/UserDevices.py) | [UserDevices.csv](./insertion/UserDevices.csv) |
+| **DeviceSensors** | [DeviceSensors.py](./insertion/DeviceSensors.py) | [DeviceSensors.csv](./insertion/DeviceSensors.csv) |
+
+## 7. Написание 10 осмысленных запросов
+
+| Number |  Description | Script |
+| --- | --- | --- |
+| 1 | Получить всех пользователей, у которых есть устройство определенного типа | [1.sql](queries/1.sql) |
+| 2 | Получить среднее значение данных для каждого типа датчика | [2.sql](queries/2.sql) |
+| 3 | Получить количество устройств в каждой группе устройств | [3.sql](queries/3.sql) |
+| 4 | Получить самое последнее событие для каждого устройства | [4.sql](queries/4.sql) |
+| 5 | Получить устройства, у которых больше определенного количества датчиков | [5.sql](queries/5.sql) |
+| 6 | Получить пользователей, у которых есть устройство с определенным датчиком | [6.sql](queries/6.sql) |
+| 7 | Получить устройства, которые никогда не имели событий | [7.sql](queries/7.sql) |
+| 8 | Получить датчик с наибольшим средним значением данных | [8.sql](queries/8.sql) |
+| 9 | Получить количество устройств у каждого пользователя | [9.sql](queries/9.sql) |
+| 10 | Получить датчик, у которого больше всего записей данных | [10.sql](queries/10.sql) |
