@@ -23,7 +23,7 @@ Kонцептуальная модель включает следующие з�
 
 
 ## 3. Логическая модель
-<img src="./images/Logic_Model.png" width="600" height="600">
+<img src="./images/Logic_Model.png" width="800" height="600">
 
 **Нормальная форма**\
 Т.к. устройства генерируют много однотипных записей, оптимальным решением будет свести таблицы к 3NF.
@@ -54,6 +54,7 @@ Kонцептуальная модель включает следующие з�
 | DeviceID | Device identifier | integer | FOREIGN KEY, NOT NULL |
 | GroupName | Group name | varchar(255) | NOT NULL |
 
+
 **Sensors**
 
 | Name | Description | Data Type | Limitation |
@@ -61,6 +62,7 @@ Kонцептуальная модель включает следующие з�
 | SensorID | Sensor identifier | integer | PRIMARY KEY |
 | SensorType | Sensor type | varchar(255) | NOT NULL |
 | SensorStatus | Sensor status | varchar(255) | NOT NULL |
+| DeviceID | Device identifier | integer | FOREIGN KEY  |
 
 **SensorData**
 
@@ -128,12 +130,11 @@ CREATE TABLE project.Devices (
 | --- | --- | --- |
 | **Devices** | [Devices.sql](./insertion/Devices.sql) | |
 | **Users** | [Users.sql](./insertion/Users.sql) | |
-| **Sensors** | [Sensors.sql](./insertion/Sensors.sql) | |
+| **Sensors** | [Sensors.py](./insertion/Sensors.py) | [Sensors.csv](./insertion/Sensors.csv) |
 | **Events** | [Events.sql](./insertion/Events.sql) | |
 | **DeviceGroups** | [DeviceGroups.sql](./insertion/DeviceGroups.sql) | |
 | **SensorData** | [SensorData.sql](./insertion/SensorData.sql) | |
 | **UserDevices** | [UserDevices.py](./insertion/UserDevices.py) | [UserDevices.csv](./insertion/UserDevices.csv) |
-| **DeviceSensors** | [DeviceSensors.py](./insertion/DeviceSensors.py) | [DeviceSensors.csv](./insertion/DeviceSensors.csv) |
 
 ## 7. Написание 10 осмысленных запросов
 

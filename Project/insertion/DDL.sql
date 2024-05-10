@@ -21,7 +21,9 @@ DROP TABLE IF EXISTS project.Sensors CASCADE;
 CREATE TABLE project.Sensors (
   SensorID SERIAL PRIMARY KEY,
   SensorType VARCHAR(255) NOT NULL,
-  SensorStatus VARCHAR(255) NOT NULL
+  SensorStatus VARCHAR(255) NOT NULL,
+  DeviceID INT,
+  FOREIGN KEY (DeviceID) REFERENCES project.Devices(DeviceID)
 );
 
 DROP TABLE IF EXISTS project.SensorData CASCADE;
@@ -58,13 +60,4 @@ CREATE TABLE project.Devices (
   DeviceName VARCHAR(255) NOT NULL,
   DeviceType VARCHAR(255) NOT NULL,
   DeviceStatus VARCHAR(255) NOT NULL
-);
-
-DROP TABLE IF EXISTS project.DeviceSensors CASCADE;
-CREATE TABLE project.DeviceSensors (
-  DeviceSensorID SERIAL PRIMARY KEY,
-  DeviceID INTEGER NOT NULL,
-  SensorID INTEGER NOT NULL,
-  FOREIGN KEY (DeviceID) REFERENCES project.Devices(DeviceID),
-  FOREIGN KEY (SensorID) REFERENCES project.Sensors(SensorID)
 );

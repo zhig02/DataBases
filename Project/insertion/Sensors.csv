@@ -1,0 +1,21 @@
+SensorType,SensorStatus
+Temperature Sensor,Active
+Humidity Sensor,Inactive
+Pressure Sensor,Active
+Proximity Sensor,Inactive
+Accelerometer,Active
+Gyroscope Sensor,Inactive
+Light Sensor,Active
+Gas Sensor,Inactive
+Infrared Sensor,Active
+Ultrasonic Sensor,Inactive
+Sound Sensor,Active
+Magnetometer Sensor,Inactive
+Image Sensor,Active
+Motion Detection Sensor,Inactive
+Water Quality Sensor,Active
+Radar Sensor,Inactive
+Smoke Sensor,Active
+RFID Tag,Inactive
+Heart Rate Sensor,Active
+GPS Sensor,Inactive
