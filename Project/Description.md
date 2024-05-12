@@ -150,3 +150,24 @@ CREATE TABLE project.Devices (
 | 8 | Получить датчик с наибольшим средним значением данных | [8.sql](queries/8.sql) |
 | 9 | Получить количество устройств у каждого пользователя | [9.sql](queries/9.sql) |
 | 10 | Получить датчик, у которого больше всего записей данных | [10.sql](queries/10.sql) |
+
+
+## 8. Создание представлений
+
+В данном проекте представления будут очень удобны, т.к. для сбора статистики из базы данных будет использоваться сторонняя программа (python, kotlin)
+
+| View Name | View Description | SQL script |
+| --- | --- | --- |
+| SensorDataView | This view joins the `SensorData` and `Sensors` tables, selecting various fields from both. | [SensorDataView.sql](./views/SensorDataView.sql) |
+| UserDevicesView | This view joins the `UserDevices`, `Users`, and `Devices` tables, selecting various fields from each. | [UserDevicesView.sql](./views/UserDevicesView.sql) |
+| DeviceGroupView | This view joins the `DeviceGroups` and `Devices` tables, selecting various fields from both. | [DeviceGroupView.sql](./views/DeviceGroupView.sql) |
+
+## 10. Создание функций
+
+А функции - будущая часть API к БД
+
+| Function Name | Function Description | SQL script |
+| --- | --- | --- |
+| add_device_link_user | This function adds a link between a device and a user in the `UserDevices` table. | [add_device_link_user.sql](./functions/add_device_link_user.sql) |
+| get_latest_device_event | This function retrieves the latest event for a given device from the `Events` table. | [get_latest_device_event.sql](./functions/get_latest_device_event.sql) |
+| update_device_status | This function updates the status of a device in the `Devices` table. | [update_device_status.sql](./functions/update_device_status.sql) |
