@@ -162,6 +162,13 @@ CREATE TABLE project.Devices (
 | UserDevicesView | This view joins the `UserDevices`, `Users`, and `Devices` tables, selecting various fields from each. | [UserDevicesView.sql](./views/UserDevicesView.sql) |
 | DeviceGroupView | This view joins the `DeviceGroups` and `Devices` tables, selecting various fields from both. | [DeviceGroupView.sql](./views/DeviceGroupView.sql) |
 
+
+## 9. Создание индексов
+
+Создание индексов разумно для полей username и devicename таблиц Users и Devices соответственно.
+
+[indexes.sql](./indexes/indexes.sql)
+
 ## 10. Создание функций
 
 А функции - будущая часть API к БД
@@ -171,3 +178,13 @@ CREATE TABLE project.Devices (
 | add_device_link_user | This function adds a link between a device and a user in the `UserDevices` table. | [add_device_link_user.sql](./functions/add_device_link_user.sql) |
 | get_latest_device_event | This function retrieves the latest event for a given device from the `Events` table. | [get_latest_device_event.sql](./functions/get_latest_device_event.sql) |
 | update_device_status | This function updates the status of a device in the `Devices` table. | [update_device_status.sql](./functions/update_device_status.sql) |
+
+## 11. Триггеры
+
+Триггеры очень удобны для уменьшения работы с базой данных - с помощью них будет осуществляться довольно простая поддержка базы в консистентном состоянии с точки зрения логики устройств.
+
+| Function Name | Function Description | SQL script |
+| --- | --- | --- |
+| activate_device_sensors | This function activates all sensors of a device when the device status is set to 'Active'. | [activate_device_sensors.sql](./triggers/active.sql) |
+| deactivate_device_sensors | This function deactivates all sensors of a device when the device status is set to 'Inactive'. | [deactivate_device_sensors.sql](./triggers/inactive.sql) |
+| prevent_active_device_deletion | This function prevents the deletion of a device when the device status is 'Active'. | [prevent_active_device_deletion.sql](./triggers/prevent_active_device_deletion.sql) |
